@@ -87,3 +87,25 @@
       ((zero? (sub1 n)) (cdr lat))
       (else
        (cons (car lat) (rempick (sub1 n) (cdr lat)))))))
+
+(define no-nums
+  (lambda (lat)
+    (cond
+      ((null? lat) '())
+      (else
+       (cond
+         ((number? (car lat))
+          (no-nums(cdr lat)))
+         (else
+          (cons (car lat) (no-nums (cdr lat)))))))))
+
+(define occur
+  (lambda (n lat)
+    (cond
+      ((null? lat) 0)
+      (else
+       (cond
+         ((eq? n (car lat))
+          (add1 (occur n (cdr lat))))
+         (else
+          (occur n (cdr lat))))))))
