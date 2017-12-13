@@ -1,3 +1,7 @@
+(define atom?
+  (lambda (a)
+    (and (not (pair? a)) (not (null? a)))))
+
 (define add1
   (lambda (m)
     (+ m 1)))
@@ -109,3 +113,18 @@
           (add1 (occur n (cdr lat))))
          (else
           (occur n (cdr lat))))))))
+
+(define occur*
+  (lambda (a l)
+    (cond
+      ((null? l) 0)
+      ((atom? (car l))
+          (cond
+            ((eq? (car l) a)
+             (add1 (occur* a (cdr l))))
+            (else
+             (occur* a (cdr 1)))))
+          (else
+           (o+ (occur* a (car l))
+               (occur* a (cdr l)))))))
+            
